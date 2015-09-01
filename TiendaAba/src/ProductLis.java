@@ -16,43 +16,11 @@ import mx.datos.Producto;
  */
 public class ProductLis {
     public void lista(){
-     List<Producto> alumnos = new ArrayList <>();
+     List<Producto> productos = new ArrayList <>();
     
     
-     //   for(Integer i = 0;  i< alumnos.size(); i++) {
-      //  System.out.println(alumnos.get(i));
-            
-     //   }
-    
-    
-   //     for (Alumno alumno : alumnos) {
-    //        System.out.println(alumno);
-     //   }
-        productos.stream().forEach(a -> {System.out.println(a);});
+
         
-        //alumnos con edad > 25
-        
-        System.out.println("Alumnos con edad > 25");
-        for(Alumno alumno : alumnos){
-            if(alumno.edad >25)
-                System.out.println(alumno);
-        }
-     List<Alumno> alumnosMayores =
-        alumnos.stream()
-                .filter(a ->{return a.edad > 25;})
-             .collect(Collectors.toList());
-     Long total = alumnos.stream()
-                .filter(a ->{return a.edad > 25;})
-                .count();
-        System.out.println("El total es:" + total);
-        double promedio = alumnos.stream()
-                .filter(a ->{return a.edad > 25;})
-                .mapToLong(a ->{return a.edad;})
-                .average()
-                .getAsDouble();
-        System.out.println(""+ promedio);
     
-    
-    }
-    
+}
 }

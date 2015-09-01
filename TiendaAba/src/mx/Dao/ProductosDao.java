@@ -5,6 +5,9 @@
  */
 package mx.Dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import mx.datos.Producto;
 
@@ -13,33 +16,39 @@ import mx.datos.Producto;
  * @author juliobitar
  */
 public class ProductosDao implements Crud{
+    private static final String SQL_INSERT =
+            "INSERT INTO productos ("
+            + "clave, descripcion, precio, clasificacion, cantidad, min, max"
+            + ") VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_SELECT =
+            "SELECT clave, descripcion, precio, clasificacion "
+            + "  FROM productos where clave= ?";
+    private static final String SQL_SELECT_All =
+            "SELECT clave, descripcion, precio, clasificacion   "
+            + "FROM productos";
+    private static final String SQL_UPDATE =
+            "UPDATE productos SET "
+            + "descripcion = ?, precio = ?, clasificacion = ?"
+            + " WHERE "
+            + "clave = ? ";
+    /* SQL to delete data */
+    private static final String SQL_DELETE =
+            "DELETE FROM productos WHERE "
+            + "clave = ?";
 
-    @Override
-    public List<Producto> list() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void create(Producto producto) {
-         public boolean insert(Integer clave,String descripcion ,Float precio,String clasificacion,Integer cantidad, Integer min, Integer max){
+   public void create(Producto productos, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
         try {
-            String query = "INSERT INTO productos VALUES();
-            st.executeUpdate(query);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+            ps = conn.prepareStatement(SQL_INSERT);
+            ps.setInt(1, productos.getClave());
+            ps.setString(2, productos.getDescripcion());
+            ps.setFloat(3, productos.getPrecio());
+            ps.setString(4, productos.getClasificacion());
+            ps.executeUpdate();
+        } finally {
+            cerrar(ps);
+            cerrar(conn);
         }
+        
     }
-
-    @Override
-    public void update(Producto producto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void eliminar(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-}
+   
