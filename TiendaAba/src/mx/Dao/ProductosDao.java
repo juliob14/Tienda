@@ -15,7 +15,7 @@ import mx.datos.Producto;
  *
  * @author juliobitar
  */
-public class ProductosDao implements Crud{
+public class ProductosDao{
     private static final String SQL_INSERT =
             "INSERT INTO productos ("
             + "clave, descripcion, precio, clasificacion, cantidad, min, max"
